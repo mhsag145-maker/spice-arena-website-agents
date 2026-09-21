@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as KitchenRouteImport } from './routes/kitchen'
 import { Route as MenuRouteImport } from './routes/menu'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const GalleryRoute = GalleryRouteImport.update({
   path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KitchenRoute = KitchenRouteImport.update({
+  id: '/kitchen',
+  path: '/kitchen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MenuRoute = MenuRouteImport.update({
   id: '/menu',
   path: '/menu',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/kitchen': typeof KitchenRoute
   '/menu': typeof MenuRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/kitchen': typeof KitchenRoute
   '/menu': typeof MenuRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/kitchen': typeof KitchenRoute
   '/menu': typeof MenuRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/gallery' | '/menu'
+  fullPaths: '/' | '/contact' | '/gallery' | '/kitchen' | '/menu'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/gallery' | '/menu'
-  id: '__root__' | '/' | '/contact' | '/gallery' | '/menu'
+  to: '/' | '/contact' | '/gallery' | '/kitchen' | '/menu'
+  id: '__root__' | '/' | '/contact' | '/gallery' | '/kitchen' | '/menu'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
+  KitchenRoute: typeof KitchenRoute
   MenuRoute: typeof MenuRoute
 }
 
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/kitchen': {
+      id: '/kitchen'
+      path: '/kitchen'
+      fullPath: '/kitchen'
+      preLoaderRoute: typeof KitchenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/menu': {
       id: '/menu'
       path: '/menu'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
+  KitchenRoute: KitchenRoute,
   MenuRoute: MenuRoute,
 }
 export const routeTree = rootRouteImport
