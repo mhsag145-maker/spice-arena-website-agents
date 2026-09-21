@@ -30,7 +30,7 @@ export const Route = createFileRoute("/menu")({
 type Line = { no: number; name: string; price: number; qty: number };
 
 function MenuPage() {
-  const [active, setActive] = useState(menu[0].slug);
+  const [active, setActive] = useState(menu[0]!.slug);
   const [lines, setLines] = useState<Line[]>([]);
   const [quickNo, setQuickNo] = useState("");
   const [quickError, setQuickError] = useState<string | null>(null);
@@ -44,7 +44,7 @@ function MenuPage() {
   const [token, setToken] = useState<number | null>(null);
 
   const submit = useServerFn(placeOrder);
-  const category = menu.find((c) => c.slug === active) ?? menu[0];
+  const category = menu.find((c) => c.slug === active) ?? menu[0]!;
   const total = useMemo(() => lines.reduce((s, l) => s + l.price * l.qty, 0), [lines]);
 
   function add(item: MenuItem) {

@@ -46,22 +46,24 @@ const slides = [
   },
 ];
 
+const hero = slides[0]!;
+
 function Home() {
   return (
     <div>
       {/* Hero */}
       <section className="relative isolate overflow-hidden">
         <img
-          src={slides[0].image}
+          src={hero.image}
           alt="Spice Arena dining"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-deep/80" />
         <div className="relative mx-auto max-w-4xl px-5 py-32 text-center md:py-44">
-          <p className="eyebrow">{slides[0].eyebrow}</p>
-          <h1 className="mt-6 text-5xl leading-tight font-light md:text-7xl">{slides[0].title}</h1>
+          <p className="eyebrow">{hero.eyebrow}</p>
+          <h1 className="mt-6 text-5xl leading-tight font-light md:text-7xl">{hero.title}</h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            {slides[0].text}
+            {hero.text}
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link to="/menu" className="btn-brass">
@@ -138,7 +140,7 @@ function Home() {
                   <div>
                     <h3 className="text-xl font-light">{c.title}</h3>
                     <p className="mt-1 text-xs tracking-wider text-muted-foreground">
-                      #{c.items[0].no} – #{c.items[c.items.length - 1].no}
+                      #{c.items[0]!.no} – #{c.items[c.items.length - 1]!.no}
                     </p>
                   </div>
                   <ChevronRight className="h-5 w-5 text-brass transition-transform duration-300 group-hover:translate-x-1" />
