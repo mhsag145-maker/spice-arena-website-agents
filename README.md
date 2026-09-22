@@ -1,14 +1,18 @@
-# Welcome to your Lovable project
+# Spice Clone Pro
+
+analyze this website: www.spicearena.com.pk and clone same to same with Order taking number wise button system Ai chat bot supported language English Urdu. also add WhatsApp button. also add buttons hover effects.
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://spice-arena-website-agents.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/4478cf27-6508-4586-872f-dbc67c82a685).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +24,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
