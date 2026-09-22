@@ -244,6 +244,41 @@
   }
 }
 
+/* Pointer-driven depth and panorama movement for selected gallery photos */
+@utility interactive-view {
+  --view-x: 0%;
+  --view-y: 0%;
+  --view-rotate-x: 0deg;
+  --view-rotate-y: 0deg;
+  cursor: grab;
+  perspective: 900px;
+
+  & img {
+    transform: translate3d(var(--view-x), var(--view-y), 0)
+      rotateX(var(--view-rotate-x)) rotateY(var(--view-rotate-y)) scale(1.12);
+    transition: transform 0.12s ease-out, filter 0.4s ease;
+    will-change: transform;
+  }
+
+  &:hover img {
+    transform: translate3d(var(--view-x), var(--view-y), 0)
+      rotateX(var(--view-rotate-x)) rotateY(var(--view-rotate-y)) scale(1.12);
+    filter: saturate(1.12) brightness(1.04);
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .interactive-view img,
+  .interactive-view:hover img {
+    transform: none;
+    transition: none;
+  }
+}
+
 @utility nav-link {
   position: relative;
   font-size: 0.78rem;
