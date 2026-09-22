@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { type PointerEvent } from "react";
 import { CDN } from "@/data/menu";
 
 export const Route = createFileRoute("/gallery")({
@@ -58,33 +57,8 @@ const food = [
 const interactiveViews = new Set(decor.slice(0, 3));
 
 function InteractivePhoto({ src, alt }: { src: string; alt: string }) {
-  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
-    if (event.pointerType === "touch") return;
-
-    const bounds = event.currentTarget.getBoundingClientRect();
-    const horizontal = (event.clientX - bounds.left) / bounds.width - 0.5;
-    const vertical = (event.clientY - bounds.top) / bounds.height - 0.5;
-
-    event.currentTarget.style.setProperty("--view-x", `${horizontal * -7}%`);
-    event.currentTarget.style.setProperty("--view-y", `${vertical * -7}%`);
-    event.currentTarget.style.setProperty("--view-rotate-x", `${vertical * -10}deg`);
-    event.currentTarget.style.setProperty("--view-rotate-y", `${horizontal * 12}deg`);
-  };
-
-  const resetView = (event: PointerEvent<HTMLDivElement>) => {
-    event.currentTarget.style.removeProperty("--view-x");
-    event.currentTarget.style.removeProperty("--view-y");
-    event.currentTarget.style.removeProperty("--view-rotate-x");
-    event.currentTarget.style.removeProperty("--view-rotate-y");
-  };
-
   return (
-    <div
-      className="tile interactive-view h-60"
-      onPointerMove={handlePointerMove}
-      onPointerLeave={resetView}
-      aria-label={`${alt}, interactive view`}
-    >
+    <div className="tile interactive-view h-60" aria-label={`${alt}, automatic 360 view`}>
       <img src={src} alt={alt} loading="lazy" className="h-full w-full object-cover" />
     </div>
   );
