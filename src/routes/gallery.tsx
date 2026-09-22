@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { type PointerEvent } from "react";
 import { CDN } from "@/data/menu";
 
 export const Route = createFileRoute("/gallery")({
@@ -54,6 +55,41 @@ const food = [
   "2026/06/Spice-Arena-06-1.jpg",
 ];
 
+const interactiveViews = new Set(decor.slice(0, 3));
+
+function InteractivePhoto({ src, alt }: { src: string; alt: string }) {
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "touch") return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const horizontal = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const vertical = (event.clientY - bounds.top) / bounds.height - 0.5;
+
+    event.currentTarget.style.setProperty("--view-x", `${horizontal * -7}%`);
+    event.currentTarget.style.setProperty("--view-y", `${vertical * -7}%`);
+    event.currentTarget.style.setProperty("--view-rotate-x", `${vertical * -10}deg`);
+    event.currentTarget.style.setProperty("--view-rotate-y", `${horizontal * 12}deg`);
+  };
+
+  const resetView = (event: PointerEvent<HTMLDivElement>) => {
+    event.currentTarget.style.removeProperty("--view-x");
+    event.currentTarget.style.removeProperty("--view-y");
+    event.currentTarget.style.removeProperty("--view-rotate-x");
+    event.currentTarget.style.removeProperty("--view-rotate-y");
+  };
+
+  return (
+    <div
+      className="tile interactive-view h-60"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetView}
+      aria-label={`${alt}, interactive view`}
+    >
+      <img src={src} alt={alt} loading="lazy" className="h-full w-full object-cover" />
+    </div>
+  );
+}
+
 function Grid({ label, title, paths }: { label: string; title: string; paths: string[] }) {
   return (
     <section className="mx-auto max-w-7xl px-5 py-16">
@@ -62,11 +98,15 @@ function Grid({ label, title, paths }: { label: string; title: string; paths: st
         <h2 className="mt-4 text-4xl font-light">{title}</h2>
       </div>
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {paths.map((p) => (
-          <div key={p} className="tile h-60">
-            <img src={`${CDN}/${p}`} alt={title} loading="lazy" className="h-full w-full object-cover" />
-          </div>
-        ))}
+        {paths.map((p) =>
+          interactiveViews.has(p) ? (
+            <InteractivePhoto key={p} src={`${CDN}/${p}`} alt={title} />
+          ) : (
+            <div key={p} className="tile h-60">
+              <img src={`${CDN}/${p}`} alt={title} loading="lazy" className="h-full w-full object-cover" />
+            </div>
+          ),
+        )}
       </div>
     </section>
   );
