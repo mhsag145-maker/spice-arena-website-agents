@@ -292,6 +292,62 @@
   }
 }
 
+@keyframes cinematic-360-view {
+  0% {
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(1);
+  }
+
+  14% {
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(1.12);
+  }
+
+  28% {
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(1.03);
+  }
+
+  46% {
+    transform: translate3d(-4%, -1%, 0) rotateX(-2deg) rotateY(9deg) scale(1.13);
+  }
+
+  64% {
+    transform: translate3d(0, -4%, 0) rotateX(-7deg) rotateY(0deg) scale(1.13);
+  }
+
+  82% {
+    transform: translate3d(4%, 1%, 0) rotateX(2deg) rotateY(-9deg) scale(1.13);
+  }
+
+  100% {
+    transform: translate3d(0, 4%, 0) rotateX(7deg) rotateY(0deg) scale(1.13);
+  }
+}
+
+@utility cinematic-view {
+  perspective: 1000px;
+
+  & img {
+    backface-visibility: hidden;
+    transform: scale(1);
+    transform-origin: center;
+    transition: transform 0.6s ease, filter 0.6s ease;
+    will-change: transform;
+  }
+
+  &:hover img {
+    animation: cinematic-360-view 6.4s ease-in-out infinite alternate;
+    filter: saturate(1.12) contrast(1.04) brightness(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .cinematic-view img,
+  .cinematic-view:hover img {
+    animation: none;
+    transform: none;
+    transition: none;
+  }
+}
+
 @utility nav-link {
   position: relative;
   font-size: 0.78rem;

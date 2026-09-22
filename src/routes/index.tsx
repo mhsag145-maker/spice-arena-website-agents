@@ -31,18 +31,21 @@ const slides = [
     title: "Comfort. Taste. Gatherings.",
     text: "Enjoy your favourite meals in a sophisticated, family-friendly setting designed for memorable evenings and corporate events.",
     image: `${CDN}/2021/04/spicearena-hero-03.jpg`,
+    cinematic: false,
   },
   {
     eyebrow: "Serving Since 2021",
     title: "Escape. Dine. Unwind.",
     text: "Experience Lahore's premium lakeside destination restaurant, offering serenity and exceptional taste.",
     image: `${CDN}/2026/06/ambience-12-s.jpg`,
+    cinematic: false,
   },
   {
     eyebrow: "Culinary Artistry",
     title: "Sizzle. Spice. Savor.",
     text: "Authentic desi BBQ, live karahis and diverse multi-cuisine flavours crafted daily by our expert chefs.",
     image: `${CDN}/2026/06/desi-05-s.jpg`,
+    cinematic: true,
   },
 ];
 
@@ -106,7 +109,7 @@ function Home() {
         <div className="grid gap-8 md:grid-cols-3">
           {slides.map((s) => (
             <article key={s.title} className="tile bg-card">
-              <div className="h-60 w-full overflow-hidden">
+              <div className={`h-60 w-full overflow-hidden ${s.cinematic ? "cinematic-view" : ""}`}>
                 <img src={s.image} alt={s.title} className="h-full w-full object-cover" />
               </div>
               <div className="p-6">
